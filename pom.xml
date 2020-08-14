@@ -6,6 +6,7 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <name>ClientesApp</name>
+    <!-- Ajuste para Jenkins -->
     <profiles>
         <profile>
             <modules>
