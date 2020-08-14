@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title> NutryApp - Impresión de historia clínica</title>
+        <h:outputScript name="js/nanoscroller.js" library="icarus-layout" />
+        <h:outputScript name="js/layout.js" library="icarus-layout" />
+        <h:outputScript name="js/paraprimefaces.js" library="nutriapp-layout" />
+
+       
+
+        <link rel="shortcut icon" type="image/x-icon" href="http://www.joycealmeyda.com/wp-content/uploads/2019/05/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="http://www.joycealmeyda.com/wp-content/uploads/2019/05/favicon.ico" />
+
+
+        <ui:insert name="head"/>
+    </h:head>
+
+    <h:body>
+        <div class="wrapper">
+
+            <h:form id="frmPlantilla" prependId="false">
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+            </h:form>
+            <ui:insert name="content"></ui:insert>
+
+        </div>
+
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+            <f:facet name="start">
+                <p:graphicImage name="images/preloader.gif" library="icarus-layout" style="width: 32px;"/>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+
+        <h:outputStylesheet name="css/animate.css" library="icarus-layout" />
+        <h:outputStylesheet name="css/nanoscroller.css" library="icarus-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="icarus-layout" />
+         <h:outputStylesheet name="css/estilos.css" library="nutriapp-layout" />
+        
+    </h:body>
+
+</html>

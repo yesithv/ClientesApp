@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>ClientesApp - Login</title>
+
+        <link rel="shortcut icon" type="image/x-icon" href="https://www.joycealmeyda.com/wp-content/uploads/2020/08/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="https://www.joycealmeyda.com/wp-content/uploads/2020/08/favicon.ico" />
+
+    </h:head>
+
+    <h:body styleClass="containerLogin">
+        <!-- Esto se utiliza para que se actualicen los mensajes apenas se carga la página-->
+        <f:metadata>
+            <f:viewAction action="#{mbLogin.prueba()}" />
+        </f:metadata>
+        <br/>
+
+        <p:growl id="growl" showDetail="true" sticky="true" /> 
+        <p:focus id="focus" for="#{mbLogin.focoPagina}" />
+
+        <div class="ui-g">
+            <p:panel id="pLogin" header="Login ClientesApp®" styleClass="panel-login">
+
+                <br/>
+                <h:graphicImage name="logoclientesapp.png" library="clientesapp-layout" style="height:81px; width: 191px;"/>
+
+                <h:form id="formLogin" prependId="false">
+                    <div class="ui-g-12" style="padding-top:35px;">
+                        <p:inputText id="itUsuario" required="true" requiredMessage="Debes ingresar tu usuario" type="text" placeholder="Ingresa tu usuario" style="width:60%;" value="#{mbLogin.usuarioLogin.usuario}"/>
+                        <p:message for="itUsuario" />
+                    </div>
+                    <div class="ui-g-12" style="padding-top:10px;">
+                        <p:password id="itPassword" required="true" requiredMessage="Debes ingresar tu clave" placeholder="Ingresa tu clave" style="width:60%" value="#{mbLogin.usuarioLogin.password}" title="Tu clave por defecto es tu número de documento" />
+                        <p:message for="itPassword"  />
+                        <p:tooltip id="toolTipFocus" for="itPassword" showEvent="focus" hideEvent="blur"  position="bottom"/>
+                    </div>
+
+                    <div class="ui-g-12" >
+                        <p:commandButton id="loginButton" value="Ingresar" actionListener="#{mbLogin.validarUsuario()}" update="pLogin" style="width:60%;"  />
+                    </div>
+                </h:form>
+
+                <div class="ui-g-2"></div>
+                <div class="ui-g-8 login-input-container">
+                 
+                </div>
+                <div class="ui-g-2">
+                </div>
+
+            </p:panel>
+
+            <!--
+            <div class="ui-g-12 footer-login">
+                <span>NutryApp ®</span><br/>
+                <span>Todos los derechos reservados</span> 
+            </div>
+            -->
+        </div>
+
+        <style type="text/css">
+            html {height: 100%;}
+            .ui-button-text, .ui-button-text-only .ui-button-text{padding:8px !important; transition:none !important;}
+            .ui-panel .ui-panel-title {font-size: 17px;}
+        </style>
+
+        <!-- <h:outputStylesheet name="css/layout-# {guestPreferences.theme}.css" library="icarus-layout" /> -->
+        <h:outputStylesheet name="css/layout-orange.css" library="icarus-layout" />
+    </h:body>
+
+</html>

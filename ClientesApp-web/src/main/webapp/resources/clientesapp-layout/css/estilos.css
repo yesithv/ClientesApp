@@ -1,0 +1,13 @@
+
+.informacionIzquierda {
+    text-align: right
+}
+
+.informacionDerecha {
+    text-align: left; 
+    font-weight: bold
+}
+
+.ui-steps .ui-steps-item {
+    width: 25%;
+}

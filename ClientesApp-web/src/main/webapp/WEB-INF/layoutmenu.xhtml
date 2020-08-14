@@ -1,0 +1,56 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pi="http://primefaces.org/icarus">
+
+
+    <h:form id="menuform">
+
+        <pi:menu widgetVar="IcarusMenu">
+
+            <p:menuitem value="Inicio" icon="fa fa-home" outcome="/dashboard"/>
+
+            <p:menuitem value="Mi perfil" icon="fa fa-user" outcome="/paciente/miperfil" />
+
+            <p:menuitem value="Nuevo paciente" icon="fa fa-user-plus" outcome="/paciente/nuevopaciente"
+                        rendered="#{mbPlantilla.personaLogueada.asistente}"/>
+            <p:menuitem  value="Buscar paciente" icon="fa fa-search" outcome="/paciente/buscarpaciente"
+                         rendered="#{mbPlantilla.personaLogueada.asistente}"/>
+
+            <p:menuitem  value="Atender" icon="fa fa-user-md" outcome="/especialista/atencionespendientes"
+                         rendered="#{mbPlantilla.personaLogueada.especialista}"/>
+
+            <p:menuitem  value="Historia clínica" icon="fa fa-medkit" outcome="/paciente/registrarhc"
+                         rendered="#{mbPlantilla.personaLogueada.paciente and mbPlantilla.personaLogueada.fktipopaciente.iddetallelista == '121'}"/>
+            <p:menuitem  value="Registrar atención" icon="fa fa-edit" outcome="/paciente/registraratencion"
+                         rendered="#{mbPlantilla.personaLogueada.paciente and mbPlantilla.personaLogueada.fktipopaciente.iddetallelista == '121'}"/>
+
+            <p:menuitem value="Cintura" icon="fa fa-sun-o" outcome="/indicadores/cintura"
+                        rendered="#{mbPlantilla.personaLogueada.paciente}"/>
+            <p:menuitem value="IMC" icon="fa fa-male" outcome="/indicadores/imc"
+                        rendered="#{mbPlantilla.personaLogueada.paciente}"/>
+            <p:menuitem value="Peso" icon="fa fa-area-chart" outcome="/indicadores/peso"
+                        rendered="#{mbPlantilla.personaLogueada.paciente}"/>
+
+            <p:menuitem  value="% Músculo" icon="fa fa-line-chart" outcome="/indicadores/musculo"
+                         rendered="#{mbPlantilla.personaLogueada.paciente and mbPlantilla.personaLogueada.fktipopaciente.iddetallelista == '119'}"/>
+            <p:menuitem  value="% Grasa corporal" icon="fa fa-bar-chart" outcome="/indicadores/pgcorporal"
+                         rendered="#{mbPlantilla.personaLogueada.paciente and mbPlantilla.personaLogueada.fktipopaciente.iddetallelista == '119'}"/>
+            <p:menuitem  value="% Grasa visceral" icon="fa fa-pie-chart" outcome="/indicadores/pgvisceral"
+                         rendered="#{mbPlantilla.personaLogueada.paciente and mbPlantilla.personaLogueada.fktipopaciente.iddetallelista == '119'}"/>
+
+
+            <p:menuitem value="Calculadora KCal" icon="fa fa-calculator" outcome="/indicadores/calculadora"
+                        rendered="#{mbPlantilla.personaLogueada.paciente}"/>
+            
+            <p:menuitem value="Ayuda" icon="fa fa-support" outcome="/ayuda" />
+
+            <p:menuitem value="Salir" icon="fa fa-sign-out" action="#{mbPlantilla.salir()}"/>
+
+        </pi:menu>
+
+    </h:form>
+
+</ui:composition>

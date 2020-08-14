@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <title>NutryApp - Ayuda</title>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmAyuda" prependId="false"> 
+
+            <div class="ui-fluid">
+
+                <!-- Grid -->
+                <div class="ui-g">
+
+                    <div class="ui-g-12">
+
+                        <div class="card">
+
+                            <h1>Ayuda:</h1>
+                            <h2>#{mbPerfil.personaEnSesion.nombresapellidos}</h2>
+                            <p>Cuentas con los siguientes canales para contactarnos:</p>
+
+                            <div class="ui-g">
+                                
+                                
+           
+
+                                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                                    <div class="box greenBack">
+                                        <i class="fa fa-fw fa-whatsapp" aria-hidden="true"></i>
+                                        <a href="#{mbDashboard.personaEnSesion.paciente and mbDashboard.personaEnSesion.fktipopaciente.iddetallelista == '121'? 'https://wa.me/573173568695' : 'https://wa.me/573166232968'}" target="_blank"> 
+                                            <h2>#{mbDashboard.personaEnSesion.paciente and mbDashboard.personaEnSesion.fktipopaciente.iddetallelista == '121'? '317 356 86 95' : '316 623 29 68'}</h2>
+                                        </a>
+                                        <p>WhatsApp</p>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                                    <div class="box yellowBack">
+                                        <i class="fa fa-fw fa-mobile" aria-hidden="true"></i>
+                                        <a href="#{mbDashboard.personaEnSesion.paciente and mbDashboard.personaEnSesion.fktipopaciente.iddetallelista == '121'? 'tel:3173568695' : 'tel:3166232968'}" target="_blank">
+                                            <h2>#{mbDashboard.personaEnSesion.paciente and mbDashboard.personaEnSesion.fktipopaciente.iddetallelista == '121'? '317 356 86 95' : '316 623 29 68'}</h2>
+                                        </a>
+                                        <p>Celular</p>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                                    <div class="box redBack">
+                                        <i class="fa fa-fw fa-envelope" aria-hidden="true"></i>
+                                        <a href="#{mbDashboard.personaEnSesion.paciente and mbDashboard.personaEnSesion.fktipopaciente.iddetallelista == '121'? 'mailto:hola@nutry.app' : 'mailto:contacto@joycealmeyda.com'}" target="_blank">
+                                            <h2>#{mbDashboard.personaEnSesion.paciente and mbDashboard.personaEnSesion.fktipopaciente.iddetallelista == '121'? 'hola@nutry.app' : 'contacto@joycealmeyda.com'}</h2>
+                                        </a>
+                                        <p>Correo electrónico</p>
+                                    </div>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                                    <div class="box blueBack">
+                                        <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                                        <a href="tel:0376844436" target="_blank">
+                                            <h2>037 6 84 44 36</h2>
+                                        </a>
+                                        <p>teléfono fijo</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
