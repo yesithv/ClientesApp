@@ -7,8 +7,6 @@ package managedBeanVarios;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import login.ServiciosLogin;
 import mapeo.AaUsuario;
 
 /**

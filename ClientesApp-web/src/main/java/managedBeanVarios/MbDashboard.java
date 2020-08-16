@@ -35,13 +35,6 @@ public class MbDashboard extends MbGeneral implements Serializable {
             }
             return;
         }
-
-
-    }
-
-
-    public void prueba() {
-        System.out.println("Prueba");
     }
 
 }

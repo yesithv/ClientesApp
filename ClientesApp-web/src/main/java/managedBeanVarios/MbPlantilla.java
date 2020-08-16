@@ -29,7 +29,6 @@ import mapeo.AaUsuario;
 public class MbPlantilla implements Serializable {
 
     private AaUsuario personaLogueada;
-    private String edadPersonaLogueada;
 
     @PostConstruct
     public void init() {
@@ -55,14 +54,6 @@ public class MbPlantilla implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(MbPlantilla.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public String getEdadPersonaLogueada() {
-        return edadPersonaLogueada;
-    }
-
-    public void setEdadPersonaLogueada(String edadPersonaLogueada) {
-        this.edadPersonaLogueada = edadPersonaLogueada;
     }
 
     public AaUsuario getPersonaLogueada() {

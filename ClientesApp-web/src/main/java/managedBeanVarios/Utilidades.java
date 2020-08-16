@@ -202,7 +202,7 @@ public class Utilidades {
     public static String getUrl() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        return "http://" + request.getServerName() + ":" + request.getLocalPort() + "/NutriApp-web/";
+        return "http://" + request.getServerName() + ":" + request.getLocalPort() + "/ClientesApp-web/";
     }
 
     /**

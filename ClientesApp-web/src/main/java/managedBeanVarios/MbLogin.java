@@ -5,13 +5,10 @@
  */
 package managedBeanVarios;
 
-import dto.DtoMensaje;
-import dto.DtoPersona;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-//import javax.faces.view.ViewScoped;
 import login.ServiciosLogin;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -41,6 +38,11 @@ public class MbLogin implements Serializable {
         this.setUsuarioLogin(new AaUsuario());
     }
 
+    /**
+     * Metodo encargado de validar el login del usuario
+     *
+     * @throws IOException
+     */
     public void validarUsuario() throws IOException {
 
         AaUsuario personaLogueada = this.serviciosLogin.validarLogin(this.getUsuarioLogin());
@@ -56,17 +58,6 @@ public class MbLogin implements Serializable {
             RequestContext.getCurrentInstance().update("focus");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Información", "Usuario y/o contraseña incorrectos, intente nuevamente"));
         }
-    }
-
-    public void nuevaCuenta() throws IOException {
-        Utilidades.redireccionar("paciente/nuevovirtual.xhtml");
-    }
-
-    /**
-     * Metodo utilizado para poder mostrar los mensajes apenas carga la pagina
-     */
-    public void prueba() {
-
     }
 
     public String getFocoPagina() {

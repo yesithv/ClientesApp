@@ -13,8 +13,7 @@
             
             <div class="top-bar-profile">
                 <div class="profile-name">
-                    <span>#{mbPlantilla.personaLogueada.nombresapellidos}</span><br/>
-                    #{mbPlantilla.personaLogueada.fkgenero.iddetallelista == '12' ? 'Bienvenida' : 'Bienvenido'}
+                    <span>Bienvenido</span><br/>
                 </div>
                 <a href="#" id="profile-image">
                     <h:graphicImage name="images/profile.png" library="icarus-layout" />
@@ -28,7 +27,7 @@
                         </a>
                     </li>
                     <li>
-                        <p:commandLink action="# {mbPlantilla.salir()}" styleClass="top-submenu-icon fa fa-fw fa-close">
+                        <p:commandLink action="#{mbPlantilla.salir()}" styleClass="top-submenu-icon fa fa-fw fa-close">
                             <span><h:outputText value="Salir" /></span>
                         </p:commandLink>
                     </li>

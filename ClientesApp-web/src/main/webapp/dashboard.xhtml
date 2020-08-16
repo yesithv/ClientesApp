@@ -14,9 +14,6 @@
 
             <div class="ui-fluid">
 
-                <!-- Grid -->
-                <div class="ui-g">
-
                     <div class="dashboard">
 
                         <div class="card">
@@ -25,23 +22,12 @@
                             <!-- Inicio dashboard-header -->
                             <div class="dashboard-header">
                                 <div class="ui-g">
-                                    <div class="ui-g-12 ui-md-6">
-                                        <div class="dashboard-title">
+                                    <div class="dashboard-title">
 
-                                            <span></span><br/>
-                                            <h2>#{mbPlantilla.personaLogueada.nombre} Bienvenid@ al sistema ClientesApp</h2>
-                                            <i class="fa fa-map-marker" style="display:inline-block;"></i>
-                                            <p style="display:inline-block;">Mi Web App</p>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g-12 ui-md-6">
-                                        <!-- Este espacio debe ir en blanco -->
-                                    </div>
-
-                                    <div class="ui-g-12 ui-g-nopad">
-                                        <f:metadata>
-                                            <f:viewAction action="#{mbDashboard.prueba()}" />
-                                        </f:metadata>
+                                        <span></span><br/>
+                                        <h2>#{mbPlantilla.personaLogueada.nombre} Bienvenid@ al sistema ClientesApp</h2>
+                                        <i class="fa fa-map-marker" style="display:inline-block;"></i>
+                                        <p style="display:inline-block;">Mi Web App</p>
                                     </div>
                                 </div>
 
@@ -50,14 +36,13 @@
 
                             <div id="main-wrapper-content">
 
-                                <p:panel header="Este es el resumen de tu historia clínica" rendered="#{mbDashboard.personaEnSesion.nombre}" >
+                                <p:panel header="Este es el resumen de tu historia clínica"  >
 
                                     <div class="ui-g">
 
                                         <div class="ui-g-12 ui-md-6 ui-lg-3">
                                             <div class="box greenBack">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
-                                                <h2>#{ mbPlantilla.personaLogueada.fkestadoactual.nombreitem}</h2>
                                                 <p>Tu estado actual</p>
                                             </div>
                                         </div>
@@ -65,9 +50,7 @@
                                             <div class="box redBack">
                                                 <i class="fa fa-medkit" aria-hidden="true"></i>
                                                 <h2>
-                                                    <h:outputText value="#{ mbPlantilla.personaLogueada.ultimacita == null ?  'Será muy pronto' : mbPlantilla.personaLogueada.ultimacita}" >
-                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                    </h:outputText>
+
                                                 </h2>
                                                 <p>Tu última atención</p>
 
@@ -78,9 +61,7 @@
                                             <div class="box blueBack">
                                                 <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
                                                 <h2>
-                                                    <h:outputText value="#{ mbPlantilla.personaLogueada.proximacitasugerida == null ? 'También será muy pronto' : mbPlantilla.personaLogueada.proximacitasugerida}" >
-                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                                    </h:outputText>
+
                                                 </h2>
                                                 <p>Tu próxima atención sugerida</p>
                                             </div>
@@ -88,8 +69,7 @@
                                         <div class="ui-g-12 ui-md-6 ui-lg-3">
                                             <div class="box yellowBack">
                                                 <i class="fa  fa-gears " aria-hidden="true"></i>
-                                                <h2>#{ mbPlantilla.personaLogueada.kgnosuyos == null ? 'Deberás definir' : mbPlantilla.personaLogueada.kgnosuyos} Kg</h2>
-                                                <p>Que <u>no</u> te pertenecen en:  #{ mbPlantilla.personaLogueada.endonde}</p>
+                                                <p>alguna configuracion</p>
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +79,7 @@
                                         <div class="ui-g-12 ui-md-12">
 
                                             <p:panel header="Evolución de tus puntos" style="">
-                                                
+
                                             </p:panel>
 
                                         </div>
@@ -113,8 +93,7 @@
                         </div>
                     </div>
 
-                    <!-- Grid -->
-                </div>
+               
             </div>
             <!-- ui-fluid -->
 

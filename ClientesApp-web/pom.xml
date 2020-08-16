@@ -133,40 +133,13 @@
                             <resources>
                                 <resource>
                                     <source>
-                                        <directory>${basedir}/src/main/webapp/resources/sass/theme/orange</directory>
-                                        <includes>
-                                            <include>**/*.scss</include>
-                                        </includes>
-                                    </source>
-                                    <destination>${basedir}/src/main/webapp/resources/primefaces-icarus-orange</destination>
-                                </resource>
-                                <!--<resource>
-                                    <source>
-                                        <directory>${basedir}/src/main/webapp/resources/sass/theme/blue</directory>
-                                        <includes>
-                                            <include>**/*.scss</include>
-                                        </includes>
-                                    </source>
-                                    <destination>${basedir}/src/main/webapp/resources/primefaces-icarus-blue</destination>
-                                </resource>
-                                <resource>
-                                    <source>
-                                        <directory>${basedir}/src/main/webapp/resources/sass/theme/green</directory>
-                                        <includes>
-                                            <include>**/*.scss</include>
-                                        </includes>
-                                    </source>
-                                    <destination>${basedir}/src/main/webapp/resources/primefaces-icarus-green</destination>
-                                </resource>
-                                <resource>
-                                    <source>
                                         <directory>${basedir}/src/main/webapp/resources/sass/theme/red</directory>
                                         <includes>
                                             <include>**/*.scss</include>
                                         </includes>
                                     </source>
                                     <destination>${basedir}/src/main/webapp/resources/primefaces-icarus-red</destination>
-                                </resource>-->
+                                </resource>
                             </resources>
                             <sassOptions>
                                 <sourcemap>:none</sourcemap>

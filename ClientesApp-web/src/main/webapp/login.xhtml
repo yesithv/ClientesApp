@@ -19,11 +19,6 @@
     </h:head>
 
     <h:body styleClass="containerLogin">
-        <!-- Esto se utiliza para que se actualicen los mensajes apenas se carga la página-->
-        <f:metadata>
-            <f:viewAction action="#{mbLogin.prueba()}" />
-        </f:metadata>
-        <br/>
 
         <p:growl id="growl" showDetail="true" sticky="true" /> 
         <p:focus id="focus" for="#{mbLogin.focoPagina}" />
@@ -52,19 +47,13 @@
 
                 <div class="ui-g-2"></div>
                 <div class="ui-g-8 login-input-container">
-                 
+
                 </div>
                 <div class="ui-g-2">
                 </div>
 
             </p:panel>
 
-            <!--
-            <div class="ui-g-12 footer-login">
-                <span>NutryApp ®</span><br/>
-                <span>Todos los derechos reservados</span> 
-            </div>
-            -->
         </div>
 
         <style type="text/css">
@@ -73,8 +62,7 @@
             .ui-panel .ui-panel-title {font-size: 17px;}
         </style>
 
-        <!-- <h:outputStylesheet name="css/layout-# {guestPreferences.theme}.css" library="icarus-layout" /> -->
-        <h:outputStylesheet name="css/layout-orange.css" library="icarus-layout" />
+        <h:outputStylesheet name="css/layout-red.css" library="icarus-layout" />
     </h:body>
 
 </html>

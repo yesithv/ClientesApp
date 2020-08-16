@@ -13,7 +13,8 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>icarus-#{guestPreferences.theme}</param-value>
+       <!-- <param-value>icarus-#{guestPreferences.theme}</param-value>-->
+       <param-value>icarus-red</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
