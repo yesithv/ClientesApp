@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package varios;
+package servicios;
 
 import javax.ejb.Singleton;
 import javax.ejb.TransactionAttribute;

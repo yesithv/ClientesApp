@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "AaNivel2.findAll", query = "SELECT a FROM AaNivel2 a")
     , @NamedQuery(name = "AaNivel2.findByIdnivel2", query = "SELECT a FROM AaNivel2 a WHERE a.idnivel2 = :idnivel2")
-    , @NamedQuery(name = "AaNivel2.findByIdcliente", query = "SELECT a FROM AaNivel2 a WHERE a.idcliente = :idcliente")
     , @NamedQuery(name = "AaNivel2.findByIdpunto", query = "SELECT a FROM AaNivel2 a WHERE a.idpunto = :idpunto")
     , @NamedQuery(name = "AaNivel2.findByIdciudad", query = "SELECT a FROM AaNivel2 a WHERE a.idciudad = :idciudad")
     , @NamedQuery(name = "AaNivel2.findByHijos", query = "SELECT a FROM AaNivel2 a WHERE a.hijos = :hijos")})
@@ -47,10 +46,6 @@ public class AaNivel2 implements Serializable {
     @Basic(optional = false)
     @Column(name = "idnivel2")
     private Integer idnivel2;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idcliente")
-    private int idcliente;
     @Basic(optional = false)
     @NotNull
     @Column(name = "idpunto")
@@ -65,6 +60,9 @@ public class AaNivel2 implements Serializable {
     private int hijos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkidnivel2", fetch = FetchType.LAZY)
     private List<AaNivel3> aaNivel3List;
+    @JoinColumn(name = "fkcliente", referencedColumnName = "idtercero")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaClientes fkcliente;
     @JoinColumn(name = "fkidnivel1", referencedColumnName = "idnivel1")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private AaNivel1 fkidnivel1;
@@ -76,9 +74,8 @@ public class AaNivel2 implements Serializable {
         this.idnivel2 = idnivel2;
     }
 
-    public AaNivel2(Integer idnivel2, int idcliente, int idpunto, int idciudad, int hijos) {
+    public AaNivel2(Integer idnivel2, int idpunto, int idciudad, int hijos) {
         this.idnivel2 = idnivel2;
-        this.idcliente = idcliente;
         this.idpunto = idpunto;
         this.idciudad = idciudad;
         this.hijos = hijos;
@@ -90,14 +87,6 @@ public class AaNivel2 implements Serializable {
 
     public void setIdnivel2(Integer idnivel2) {
         this.idnivel2 = idnivel2;
-    }
-
-    public int getIdcliente() {
-        return idcliente;
-    }
-
-    public void setIdcliente(int idcliente) {
-        this.idcliente = idcliente;
     }
 
     public int getIdpunto() {
@@ -131,6 +120,14 @@ public class AaNivel2 implements Serializable {
 
     public void setAaNivel3List(List<AaNivel3> aaNivel3List) {
         this.aaNivel3List = aaNivel3List;
+    }
+
+    public AaClientes getFkcliente() {
+        return fkcliente;
+    }
+
+    public void setFkcliente(AaClientes fkcliente) {
+        this.fkcliente = fkcliente;
     }
 
     public AaNivel1 getFkidnivel1() {

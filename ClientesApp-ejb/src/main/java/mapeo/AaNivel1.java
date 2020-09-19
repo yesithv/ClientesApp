@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "AaNivel1.findAll", query = "SELECT a FROM AaNivel1 a")
     , @NamedQuery(name = "AaNivel1.findByIdnivel1", query = "SELECT a FROM AaNivel1 a WHERE a.idnivel1 = :idnivel1")
-    , @NamedQuery(name = "AaNivel1.findByIdcliente", query = "SELECT a FROM AaNivel1 a WHERE a.idcliente = :idcliente")
     , @NamedQuery(name = "AaNivel1.findByIdpunto", query = "SELECT a FROM AaNivel1 a WHERE a.idpunto = :idpunto")
     , @NamedQuery(name = "AaNivel1.findByIdciudad", query = "SELECT a FROM AaNivel1 a WHERE a.idciudad = :idciudad")
     , @NamedQuery(name = "AaNivel1.findByHijos", query = "SELECT a FROM AaNivel1 a WHERE a.hijos = :hijos")})
@@ -45,10 +46,6 @@ public class AaNivel1 implements Serializable {
     @Basic(optional = false)
     @Column(name = "idnivel1")
     private Integer idnivel1;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idcliente")
-    private int idcliente;
     @Basic(optional = false)
     @NotNull
     @Column(name = "idpunto")
@@ -63,6 +60,9 @@ public class AaNivel1 implements Serializable {
     private int hijos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkidnivel1", fetch = FetchType.LAZY)
     private List<AaNivel2> aaNivel2List;
+    @JoinColumn(name = "fkcliente", referencedColumnName = "idtercero")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaClientes fkcliente;
 
     public AaNivel1() {
     }
@@ -71,9 +71,8 @@ public class AaNivel1 implements Serializable {
         this.idnivel1 = idnivel1;
     }
 
-    public AaNivel1(Integer idnivel1, int idcliente, int idpunto, int idciudad, int hijos) {
+    public AaNivel1(Integer idnivel1, int idpunto, int idciudad, int hijos) {
         this.idnivel1 = idnivel1;
-        this.idcliente = idcliente;
         this.idpunto = idpunto;
         this.idciudad = idciudad;
         this.hijos = hijos;
@@ -85,14 +84,6 @@ public class AaNivel1 implements Serializable {
 
     public void setIdnivel1(Integer idnivel1) {
         this.idnivel1 = idnivel1;
-    }
-
-    public int getIdcliente() {
-        return idcliente;
-    }
-
-    public void setIdcliente(int idcliente) {
-        this.idcliente = idcliente;
     }
 
     public int getIdpunto() {
@@ -126,6 +117,14 @@ public class AaNivel1 implements Serializable {
 
     public void setAaNivel2List(List<AaNivel2> aaNivel2List) {
         this.aaNivel2List = aaNivel2List;
+    }
+
+    public AaClientes getFkcliente() {
+        return fkcliente;
+    }
+
+    public void setFkcliente(AaClientes fkcliente) {
+        this.fkcliente = fkcliente;
     }
 
     @Override

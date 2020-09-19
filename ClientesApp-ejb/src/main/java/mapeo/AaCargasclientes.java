@@ -10,9 +10,12 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,9 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AaCargasclientes.findAll", query = "SELECT a FROM AaCargasclientes a")
     , @NamedQuery(name = "AaCargasclientes.findByIdcargascliente", query = "SELECT a FROM AaCargasclientes a WHERE a.idcargascliente = :idcargascliente")
     , @NamedQuery(name = "AaCargasclientes.findByFechacarga", query = "SELECT a FROM AaCargasclientes a WHERE a.fechacarga = :fechacarga")
-    , @NamedQuery(name = "AaCargasclientes.findByIdprimercliente", query = "SELECT a FROM AaCargasclientes a WHERE a.idprimercliente = :idprimercliente")
-    , @NamedQuery(name = "AaCargasclientes.findByIdultimocliente", query = "SELECT a FROM AaCargasclientes a WHERE a.idultimocliente = :idultimocliente")
-    , @NamedQuery(name = "AaCargasclientes.findByIdusuarioquecarga", query = "SELECT a FROM AaCargasclientes a WHERE a.idusuarioquecarga = :idusuarioquecarga")
     , @NamedQuery(name = "AaCargasclientes.findByObservaciones", query = "SELECT a FROM AaCargasclientes a WHERE a.observaciones = :observaciones")})
 public class AaCargasclientes implements Serializable {
 
@@ -50,21 +50,18 @@ public class AaCargasclientes implements Serializable {
     @Column(name = "fechacarga")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacarga;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idprimercliente")
-    private int idprimercliente;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idultimocliente")
-    private int idultimocliente;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idusuarioquecarga")
-    private int idusuarioquecarga;
     @Size(max = 60)
     @Column(name = "observaciones")
     private String observaciones;
+    @JoinColumn(name = "fkprimercliente", referencedColumnName = "idtercero")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaClientes fkprimercliente;
+    @JoinColumn(name = "fkultimocliente", referencedColumnName = "idtercero")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaClientes fkultimocliente;
+    @JoinColumn(name = "fkusuariocarga", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaUsuario fkusuariocarga;
 
     public AaCargasclientes() {
     }
@@ -73,12 +70,9 @@ public class AaCargasclientes implements Serializable {
         this.idcargascliente = idcargascliente;
     }
 
-    public AaCargasclientes(Integer idcargascliente, Date fechacarga, int idprimercliente, int idultimocliente, int idusuarioquecarga) {
+    public AaCargasclientes(Integer idcargascliente, Date fechacarga) {
         this.idcargascliente = idcargascliente;
         this.fechacarga = fechacarga;
-        this.idprimercliente = idprimercliente;
-        this.idultimocliente = idultimocliente;
-        this.idusuarioquecarga = idusuarioquecarga;
     }
 
     public Integer getIdcargascliente() {
@@ -97,36 +91,36 @@ public class AaCargasclientes implements Serializable {
         this.fechacarga = fechacarga;
     }
 
-    public int getIdprimercliente() {
-        return idprimercliente;
-    }
-
-    public void setIdprimercliente(int idprimercliente) {
-        this.idprimercliente = idprimercliente;
-    }
-
-    public int getIdultimocliente() {
-        return idultimocliente;
-    }
-
-    public void setIdultimocliente(int idultimocliente) {
-        this.idultimocliente = idultimocliente;
-    }
-
-    public int getIdusuarioquecarga() {
-        return idusuarioquecarga;
-    }
-
-    public void setIdusuarioquecarga(int idusuarioquecarga) {
-        this.idusuarioquecarga = idusuarioquecarga;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public AaClientes getFkprimercliente() {
+        return fkprimercliente;
+    }
+
+    public void setFkprimercliente(AaClientes fkprimercliente) {
+        this.fkprimercliente = fkprimercliente;
+    }
+
+    public AaClientes getFkultimocliente() {
+        return fkultimocliente;
+    }
+
+    public void setFkultimocliente(AaClientes fkultimocliente) {
+        this.fkultimocliente = fkultimocliente;
+    }
+
+    public AaUsuario getFkusuariocarga() {
+        return fkusuariocarga;
+    }
+
+    public void setFkusuariocarga(AaUsuario fkusuariocarga) {
+        this.fkusuariocarga = fkusuariocarga;
     }
 
     @Override

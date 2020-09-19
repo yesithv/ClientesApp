@@ -25,9 +25,9 @@ public class ServiciosLoginImpl implements ServiciosLogin {
     @Override
     public AaUsuario validarLogin(AaUsuario usuarioValidar) {
         AaUsuario personaRetornar;
-        String consulta = "  SELECT a FROM AaUsuario a WHERE a.usuario = :pUsuario AND a.password = :pPassword AND a.activo = 1 ";
+        String consulta = "  SELECT a FROM AaUsuario a WHERE a.documento = :pDocumento AND a.password = :pPassword AND a.activo = 1 ";
         Query qConsulta = em.createQuery(consulta, AaUsuario.class);
-        qConsulta.setParameter("pUsuario", usuarioValidar.getUsuario());
+        qConsulta.setParameter("pDocumento", usuarioValidar.getDocumento());
         qConsulta.setParameter("pPassword", usuarioValidar.getPassword());
         if (qConsulta.getResultList().isEmpty()) {
             personaRetornar = null;

@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "AaNivel6.findAll", query = "SELECT a FROM AaNivel6 a")
     , @NamedQuery(name = "AaNivel6.findByIdnivel6", query = "SELECT a FROM AaNivel6 a WHERE a.idnivel6 = :idnivel6")
-    , @NamedQuery(name = "AaNivel6.findByIdcliente", query = "SELECT a FROM AaNivel6 a WHERE a.idcliente = :idcliente")
     , @NamedQuery(name = "AaNivel6.findByIdpunto", query = "SELECT a FROM AaNivel6 a WHERE a.idpunto = :idpunto")
     , @NamedQuery(name = "AaNivel6.findByIdcuidad", query = "SELECT a FROM AaNivel6 a WHERE a.idcuidad = :idcuidad")
     , @NamedQuery(name = "AaNivel6.findByHijos", query = "SELECT a FROM AaNivel6 a WHERE a.hijos = :hijos")})
@@ -45,10 +44,6 @@ public class AaNivel6 implements Serializable {
     private Integer idnivel6;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idcliente")
-    private int idcliente;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "idpunto")
     private int idpunto;
     @Basic(optional = false)
@@ -59,6 +54,9 @@ public class AaNivel6 implements Serializable {
     @NotNull
     @Column(name = "hijos")
     private int hijos;
+    @JoinColumn(name = "fkcliente", referencedColumnName = "idtercero")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaClientes fkcliente;
     @JoinColumn(name = "fkidnivel5", referencedColumnName = "idnivel5")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private AaNivel5 fkidnivel5;
@@ -70,9 +68,8 @@ public class AaNivel6 implements Serializable {
         this.idnivel6 = idnivel6;
     }
 
-    public AaNivel6(Integer idnivel6, int idcliente, int idpunto, int idcuidad, int hijos) {
+    public AaNivel6(Integer idnivel6, int idpunto, int idcuidad, int hijos) {
         this.idnivel6 = idnivel6;
-        this.idcliente = idcliente;
         this.idpunto = idpunto;
         this.idcuidad = idcuidad;
         this.hijos = hijos;
@@ -84,14 +81,6 @@ public class AaNivel6 implements Serializable {
 
     public void setIdnivel6(Integer idnivel6) {
         this.idnivel6 = idnivel6;
-    }
-
-    public int getIdcliente() {
-        return idcliente;
-    }
-
-    public void setIdcliente(int idcliente) {
-        this.idcliente = idcliente;
     }
 
     public int getIdpunto() {
@@ -116,6 +105,14 @@ public class AaNivel6 implements Serializable {
 
     public void setHijos(int hijos) {
         this.hijos = hijos;
+    }
+
+    public AaClientes getFkcliente() {
+        return fkcliente;
+    }
+
+    public void setFkcliente(AaClientes fkcliente) {
+        this.fkcliente = fkcliente;
     }
 
     public AaNivel5 getFkidnivel5() {

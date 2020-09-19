@@ -65,6 +65,9 @@ public class AaNivel4 implements Serializable {
     private int hijos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkidnivel4", fetch = FetchType.LAZY)
     private List<AaNivel5> aaNivel5List;
+    @JoinColumn(name = "fkcliente", referencedColumnName = "idtercero")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private AaClientes fkcliente;
     @JoinColumn(name = "fkidnivel3", referencedColumnName = "idnivel3")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private AaNivel3 fkidnivel3;
@@ -131,6 +134,14 @@ public class AaNivel4 implements Serializable {
 
     public void setAaNivel5List(List<AaNivel5> aaNivel5List) {
         this.aaNivel5List = aaNivel5List;
+    }
+
+    public AaClientes getFkcliente() {
+        return fkcliente;
+    }
+
+    public void setFkcliente(AaClientes fkcliente) {
+        this.fkcliente = fkcliente;
     }
 
     public AaNivel3 getFkidnivel3() {
