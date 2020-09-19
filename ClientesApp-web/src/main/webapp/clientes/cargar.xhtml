@@ -20,7 +20,7 @@
                     <div class="ui-g-12">
 
                         <div class="card">
-                            <h1>Ultima carga realizada: 25 de Junio 08:00</h1>
+                            <h1>Fecha de la última carga: #{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fechacarga : 'Ninguna'}</h1>
                             <p>A continuación se muestran los ultimos datos que se cargaron al sistema</p>
 
                             <div class="ui-g-12 ui-md-6">
@@ -73,12 +73,12 @@
 
                             <p:spacer height="50" />
                             <h1>Próxima carga a realizar: </h1>
-                            <p:commandButton value=" Consultar nuevos terceros " icon="fa fa-search Fs14 White"  styleClass="pull-right" style="width: 30%;" actionListener="#{mbCargarClientes.buscarTercerosSinCargar()}" update="dtClientesSinCargar"/>
+                            <p:commandButton value=" Buscar nuevos terceros " icon="fa fa-search Fs14 White"  styleClass="pull-right" style="width: 30%;" actionListener="#{mbCargarClientes.buscarTercerosSinCargar()}" update="dtClientesSinCargar"/>
                             <p:spacer height="50" />
 
                             <div class="ui-g">
                                 <div class="ui-g-12">
-                                    <p:dataTable id="dtClientesSinCargar" var="tercero" value="#{mbCargarClientes.tercerosList}"  rowKey="#{tercero.idtercero}" paginator="true" rows="10" reflow="true" emptyMessage="No hay terceros registrados">
+                                    <p:dataTable id="dtClientesSinCargar" var="tercero" value="#{mbCargarClientes.tercerosList}"  rowKey="#{tercero.idtercero}" paginator="true" rows="10" reflow="true" emptyMessage="No hay terceros pendientes por cargar">
                                         <f:facet name="header">
                                             Terceros pendientes por cargar
                                         </f:facet>

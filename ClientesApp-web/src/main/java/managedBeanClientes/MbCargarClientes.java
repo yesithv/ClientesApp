@@ -81,6 +81,7 @@ public class MbCargarClientes extends MbGeneral implements Serializable {
         nuevaCarga.setFkusuariocarga(usuarioCarga);
         // Observaciones y Guardar
         nuevaCarga.setObservaciones(this.getObservaciones());
+        nuevaCarga.setFechacarga(Utilidades.getFechaHoraActualDate());
         this.serviciosVarios.guardarObjeto(nuevaCarga);
         
         this.reIniciarDatos();
