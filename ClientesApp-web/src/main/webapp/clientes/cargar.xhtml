@@ -10,7 +10,7 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form id="frmMiPerfil" prependId="false"> 
+        <h:form id="frmCargarDatos" prependId="false"> 
 
             <div class="ui-fluid">
 
@@ -27,13 +27,13 @@
                                 <p:panel header="Datos del primer cliente cargado" style="">
                                     <p:panelGrid columns="2" layout="grid" style="margin-bottom:20px">
                                         <h:outputText value="id:" style="font-weight: bold"/>
-                                        <h:outputText value="10" />
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkprimercliente.idtercero : ''}" />
 
-                                        <h:outputText value="Documento:" style="font-weight: bold"/>
-                                        <h:outputText value="1231231" />
+                                        <h:outputText value="Número de documento:" style="font-weight: bold"/>
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkprimercliente.numerodocumento : ''}" />
 
-                                        <h:outputText value="Nombres:" style="font-weight: bold"/>
-                                        <h:outputText value="Facundo Alberto Gonzalez Piedraita" />
+                                        <h:outputText value="Nombres y apellidos:" style="font-weight: bold"/>
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkprimercliente.nombresyapellidos : ''}" />
                                     </p:panelGrid>
                                 </p:panel>
                             </div>
@@ -42,13 +42,13 @@
                                 <p:panel header="Datos del último cliente cargado" style="">
                                     <p:panelGrid columns="2" layout="grid" style="margin-bottom:20px">
                                         <h:outputText value="id:" style="font-weight: bold"/>
-                                        <h:outputText value="45" />
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkultimocliente.idtercero : ''}" />
 
-                                        <h:outputText value="Documento:" style="font-weight: bold"/>
-                                        <h:outputText value="3453453" />
+                                        <h:outputText value="Número de documento" style="font-weight: bold"/>
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkultimocliente.numerodocumento : ''}" />
 
-                                        <h:outputText value="Nombres:" style="font-weight: bold"/>
-                                        <h:outputText value="Mariana Juliana Perez Ochoa Duarte" />
+                                        <h:outputText value="Nombres y apellidos:" style="font-weight: bold"/>
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkultimocliente.nombresyapellidos : ''}" />
                                     </p:panelGrid>
                                 </p:panel>
                             </div>
@@ -57,38 +57,41 @@
                                 <p:panel header="Otros Datos:" style="">
                                     <p:panelGrid columns="2" layout="grid" style="margin-bottom:20px">
                                         <h:outputText value="Observaciones registradas:" style="font-weight: bold"/>
-                                        <h:outputText value="Se realiza la primera carga y todo carga sin problemas" />
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.observaciones : ''}" />
 
                                         <h:outputText value="id del Usuario que realizó la carga:" style="font-weight: bold"/>
-                                        <h:outputText value="123" />
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkusuariocarga.idusuario : ''}" />
 
-                                        <h:outputText value="Nombre del usuario que realizó la carga:" style="font-weight: bold"/>
-                                        <h:outputText value="Alvaro Almeida" />
+                                        <h:outputText value="Número de documento del que realizó la carga:" style="font-weight: bold"/>
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkusuariocarga.documento  : ''}" />
+
+                                        <h:outputText value="Nombres y apellidos del usuario que realizó la carga:" style="font-weight: bold"/>
+                                        <h:outputText value="#{mbCargarClientes.ultimosDatos != null ? mbCargarClientes.ultimosDatos.fkusuariocarga.nombre : ''}" />
                                     </p:panelGrid>
                                 </p:panel>
                             </div>
 
                             <p:spacer height="50" />
                             <h1>Próxima carga a realizar: </h1>
-                            <p:commandButton value=" Consultar nuevos clientes " icon="fa fa-search Fs14 White"  styleClass="pull-right" style="width: 30%;"/>
+                            <p:commandButton value=" Consultar nuevos terceros " icon="fa fa-search Fs14 White"  styleClass="pull-right" style="width: 30%;" actionListener="#{mbCargarClientes.buscarTercerosSinCargar()}" update="dtClientesSinCargar"/>
                             <p:spacer height="50" />
 
                             <div class="ui-g">
                                 <div class="ui-g-12">
-                                    <p:dataTable var="car" value="#{dtSelectionView.cars7}" selectionMode="single" selection="#{dtSelectionView.selectedCar}" rowKey="#{car.id}" paginator="true" rows="10" reflow="true">
+                                    <p:dataTable id="dtClientesSinCargar" var="tercero" value="#{mbCargarClientes.tercerosList}"  rowKey="#{tercero.idtercero}" paginator="true" rows="10" reflow="true" emptyMessage="No hay terceros registrados">
                                         <f:facet name="header">
-                                            Clientes pendientes por cargar
+                                            Terceros pendientes por cargar
                                         </f:facet>
-                                        <p:column headerText="Id Cliente" sortBy="#{car.id}">
-                                            <h:outputText value="#{car.id}" />
+                                        <p:column headerText="Id Tercero" sortBy="#{tercero.idtercero}">
+                                            <h:outputText value="#{tercero.idtercero}" />
                                         </p:column>
 
-                                        <p:column headerText="Número de documento" sortBy="#{car.year}">
-                                            <h:outputText value="#{car.year}" />
+                                        <p:column headerText="NIT / CC" sortBy="#{tercero.nit}">
+                                            <h:outputText value="#{tercero.nit}" />
                                         </p:column>
 
-                                        <p:column headerText="Nombres y Apellidos" sortBy="#{car.brand}">
-                                            <h:outputText value="#{car.brand}" />
+                                        <p:column headerText="Nombres y Apellidos" sortBy="#{tercero.nombres}">
+                                            <h:outputText value="#{tercero.nombres} #{tercero.nombre2} #{tercero.apellidos} #{tercero.apellido2}" />
                                         </p:column>
                                     </p:dataTable>
                                     <p:spacer height="10" />
@@ -97,23 +100,24 @@
 
                             <h3>Observaciones de la carga</h3>
                             <h:outputText id="display" />
-                            <p:inputTextarea rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} caracteres restantes." autoResize="true" />
+                            <p:inputTextarea rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} caracteres restantes." autoResize="true" value="#{mbCargarClientes.observaciones}"/>
 
                             <br/>
                             <br/>
-                            <p:commandButton  value=" Cargar los nuevos clientes a ClientesApp" icon="fa fa-save Fs14 White" styleClass="pull-right" style="width: 30%;"/>
+                            <p:commandButton  value=" Cargar los terceros a ClientesApp" icon="fa fa-save Fs14 White" styleClass="pull-right" style="width: 30%;" onclick="PF('dlgConfirmacion').show();" />
                             <br/>
                             <br/>
 
-                            <p:dialog header="Confirmación" widgetVar="dlgConfirmacion" modal="true" height="100" width="250" responsive="true" >
-                                <h:outputText value="¿Estás seguro que deseas editar tus datos en NutryApp?" />
+                            <p:dialog header="Confirmación" widgetVar="dlgConfirmacion" modal="true" height="100" width="450" responsive="true" resizable="false">
+                                <h:outputText value="¿Estás seguro que deseas cargar los nuevos clientes a ClientesApp?" />
+                                <br/>
                                 <br/>
                                 <div class="ui-g">
                                     <div class="ui-g-6">
-                                        <p:commandButton value="Sí" actionListener="#{mbPerfil.guardarPerfil()}" update="frmMiPerfil growl"  styleClass="ui-confirmdialog-yes GreenButton" icon="ui-icon-check fa fa-check Fs14 White" />
+                                        <p:commandButton value="No" type="button" onclick="PF('dlgConfirmacion').hide();" styleClass="ui-confirmdialog-no RedButton" icon="ui-icon-close fa fa-close Fs14 White" />
                                     </div>
                                     <div class="ui-g-6">
-                                        <p:commandButton value="No" type="button" onclick="PF('dlgConfirmacion').hide();" styleClass="ui-confirmdialog-no RedButton" icon="ui-icon-close fa fa-close Fs14 White" />
+                                        <p:commandButton value="Sí" actionListener="#{mbCargarClientes.cargarTercerosAClientesApp()}" update="frmCargarDatos" styleClass="ui-confirmdialog-yes GreenButton" icon="ui-icon-check fa fa-check Fs14 White" />
                                     </div>
                                 </div>
                             </p:dialog>   
