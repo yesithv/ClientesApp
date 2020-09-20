@@ -3,7 +3,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/template.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <ui:define name="head">
         <title>ClientesApp - Cargar clientes</title>
@@ -80,7 +81,7 @@
                                 <div class="ui-g-12">
                                     <p:dataTable id="dtClientesSinCargar" var="tercero" value="#{mbCargarClientes.tercerosList}"  rowKey="#{tercero.idtercero}" paginator="true" rows="10" reflow="true" emptyMessage="No hay terceros pendientes por cargar">
                                         <f:facet name="header">
-                                            Terceros pendientes por cargar
+                                           #{fn:length(mbCargarClientes.tercerosList)} Terceros pendientes por cargar
                                         </f:facet>
                                         <p:column headerText="Id Tercero" sortBy="#{tercero.idtercero}">
                                             <h:outputText value="#{tercero.idtercero}" />

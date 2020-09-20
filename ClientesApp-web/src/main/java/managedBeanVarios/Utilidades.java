@@ -35,7 +35,7 @@ public class Utilidades {
         Date fechaActual = new Date();
         sdf.setTimeZone(TimeZone.getTimeZone("GMT-05"));
         String dateString = sdf.format(fechaActual);
-        return dateString; 
+        return dateString;
     }
 
     /**
@@ -218,5 +218,32 @@ public class Utilidades {
         calendar.add(Calendar.DAY_OF_YEAR, dias);
         return calendar.getTime();
     }
-    
+
+    /**
+     * Calcula aleatoriamente nombres y apellidos
+     *
+     * @return nombres y apellidos
+     */
+    public static String getNombreApellidosAleatorio() {
+        String[] nombres = {"Andrea Liseth", "Juan David", "Carmelino Baldomero", "Felipe Balduino", "Jey Baldwin", "Pedro Baltasar", "George Barry", "Jey Bartolo",
+            "Facundo Bartolomé", "Pedro Baruc", "Baruj Felipe", "Ana Candelaria", "Pepa Cándida", "Maria Canela", "Guadalupe Caridad", "Juliana Carina", "Marina Carisa",
+            "Maria Caritina", "Luciana Carlota", "Pepo Baltazar", "Pedro Alberto", "Juan Diego", "Pitufo Juan", "Pepito Fulano", "Juan Alberto", "Maria Esperanza", "Pedro Facundo"};
+        String[] apellidos = {"Gomez Alvarez", "Guerrero Mancera", "Cardenas Rodriguez", "Cardiel Cardona", "Cardona Perez", "Cardoso Molano", "Urrego Cariaga", "Enthepen Carillo",
+            "Carion Gonzalez", "Castiyo Florez", "Gaona Castorena", "Castro Viejo", "Grande Tolome", "Grangenal Smith", "Grano Detalle", "Grasia Perez", "Griego Mendoza",
+            "Grigalva Comision", "Almeyda Sanchez", "Gomez Esparza", "Valencia Galván", "Galvan Escobar", "Perea Uldarriaga", "Esparza Perez", "Urbina Almeyda", "Calderon Shalom",
+            "Galvan Escobar", "Jimenez Urrego", "Sarate Muñoz", "Rodriguez Muñoz"};
+
+        return nombres[(int) (Math.floor(Math.random() * ((nombres.length - 1) - 0 + 1) + 0))] + " " + apellidos[(int) (Math.floor(Math.random() * ((apellidos.length - 1) - 0 + 1) + 0))];
+    }
+
+    /**
+     * Calcula un numero aleatorio teniendo en cuenta el máximo
+     *
+     * @param maximo Limite superior
+     * @return numero aleatorio
+     */
+    public static int getNumeroAletario(Integer maximo) {
+        return (int) (Math.random() * maximo);
+    }
+
 }
