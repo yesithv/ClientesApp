@@ -19,6 +19,11 @@ public interface ServiciosCarga {
 
     AaCargasclientes buscarUltimaCarga();
 
+    /**
+     * Buscar en la tabla terceros los que tienen tipo de cliente = 1
+     * @param ultimoIdCargado ultimo cliente cargado
+     * @return Listado de terceros
+     */
     List<Terceros> tercerosList(Integer ultimoIdCargado);
 
     void cargarTercerosClientesApp();
