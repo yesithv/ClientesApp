@@ -54,8 +54,4 @@ public class ServiciosCargaImpl implements ServiciosCarga {
         return (List<Terceros>) qConsulta.getResultList();
     }
 
-    @Override
-    public void cargarTercerosClientesApp() {
-
-    }
 }

@@ -6,6 +6,7 @@
 package servicios;
 
 import javax.ejb.Remote;
+import mapeo.AaClientes;
 //import mapeo.Detallelista;
 
 /**
@@ -23,6 +24,15 @@ public interface ServiciosVarios {
      * @return true si guarda correcamente, de lo contrario false
      */
     Boolean guardarObjeto(Object objetoGuardar);
+
+    /**
+     * Metodo especial para el guardado de los clientes ya que ademas de guardar
+     * el parametro, asigna al usuario en el nivel correspondiente
+     *
+     * @param objetoCliente objeto cliente a guardar
+     * @return true si guarda correcamente, de lo contrario false
+     */
+    Boolean guardarObjetoCliente(AaClientes objetoCliente);
 
     /**
      * Servicio encargado de actualizar una entidad en la base de datos
