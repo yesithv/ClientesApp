@@ -70,12 +70,12 @@ public class MbCargarClientes extends MbGeneral implements Serializable {
             cliente.setNumerodocumento(tercero.getNit().replaceAll("\\s", ""));
             cliente.setNombresyapellidos(tercero.getNombres().concat(tercero.getNombre2()).concat(tercero.getApellidos()).concat(tercero.getApellido2()));
             cliente.setActivo(Short.valueOf("1"));
-            this.serviciosVarios.guardarObjeto(cliente);
+            this.serviciosVarios.guardarObjetoCliente(cliente);
         }
         // Creo usuarios temporales para probar la ubicación de los usuarios en el nivel correspondiente:
         List<AaClientes> usuariosAleatorios = this.crearUsuariosRandomicos(30);
         for (AaClientes usuariosAleatorio : usuariosAleatorios) {
-            this.serviciosVarios.guardarObjeto(usuariosAleatorio);
+            this.serviciosVarios.guardarObjetoCliente(usuariosAleatorio);
         }
 
         AaCargasclientes nuevaCarga = new AaCargasclientes();
