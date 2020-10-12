@@ -14,13 +14,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import mapeo.AaCapacidades;
 import mapeo.AaClientes;
+import mapeo.AaConfiguraciones;
 import mapeo.AaNivel1;
 import mapeo.AaNivel2;
 import mapeo.AaNivel3;
 import mapeo.AaNivel4;
 import mapeo.AaNivel5;
 import mapeo.AaNivel6;
-import mapeo.Terceros;
 
 /**
  * @Singleton Porque necesito una sola instancia dlel ejb en toda la aplicacion
@@ -28,6 +28,12 @@ import mapeo.Terceros;
  */
 @Singleton
 public class ServiciosVariosImpl implements ServiciosVarios {
+
+    private String sConsulta = "";
+    private Query qConsulta = null;
+    private Integer idPunto = 1;
+    private Integer idCiudad = 1;
+    private Integer numeroHijos = 6;
 
     @PersistenceContext
     private EntityManager em;
@@ -54,68 +60,134 @@ public class ServiciosVariosImpl implements ServiciosVarios {
     }
 
     @Override
-    public Boolean guardarObjetoCliente(AaClientes objetoCliente) {
-        this.guardarObjeto(objetoCliente);
+    public Boolean guardarObjetoCliente(AaClientes nuevoClienteGuardar) {
+        // Primero guardo el cliente en la tabla de clientes 
+        this.guardarObjeto(nuevoClienteGuardar);
 
-        // Averiguo cual tabla esta disponible para guardar el nuevo cliente
-        AaCapacidades capacidadActual = new AaCapacidades();
-        List<AaCapacidades> capacidadesList = this.obtenerCapacidades();
-        for (AaCapacidades capacidad : capacidadesList) {
-            if (capacidad.getNumeroregistros() < capacidad.getMaximacapacidad()) {
-                capacidadActual = capacidad;
-                break;
-            }
-        }
+        // Averiguo cual tabla esta disponible para guardar el nuevo cliente en el nivel que le corresponde 
+        AaCapacidades capacidadActual = this.obtenerTablaConCapacidad();
 
-        // Busco el padre disponible
-        String consulta = "";
-        Query qConsulta = null;
-        List<AaNivel1> listaNivel1 = null;
-        List<AaNivel2> listaNivel2 = null;
-        List<AaNivel3> listaNivel3 = null;
-        List<AaNivel4> listaNivel4 = null;
-        List<AaNivel5> listaNivel5 = null;
-        List<AaNivel6> listaNivel6 = null;
+        // Averiguo la configuracion actual para saber el numero de hijos
+        // AaConfiguraciones configuracionActual = this.obtenerConfiguracionActual();
+       
+        // el idCapacidad es el nivel de la tabla disponible donde se va a guardar el nuevo cliente  
         switch (capacidadActual.getIdcapacidad()) {
             case 1:
-                consulta = " SELECT N FROM AaNivel1 N order by N.hijos, N.idnivel1 ";
-                qConsulta = em.createQuery(consulta, AaNivel1.class);
-                listaNivel1 = (List<AaNivel1>) qConsulta.getResultList();
+                this.guardarEnElNivel1(nuevoClienteGuardar);
                 break;
             case 2:
-                consulta = " SELECT N FROM AaNivel2 N order by N.hijos, N.idnivel2 ";
-                qConsulta = em.createQuery(consulta, AaNivel2.class);
-                listaNivel2 = (List<AaNivel2>) qConsulta.getResultList();
+                this.guardarEnElNivel2(nuevoClienteGuardar);
                 break;
             case 3:
-                consulta = " SELECT N FROM AaNivel3 N order by N.hijos, N.idnivel3 ";
-                qConsulta = em.createQuery(consulta, AaNivel3.class);
-                listaNivel3 = (List<AaNivel3>) qConsulta.getResultList();
+                this.guardarEnElNivel3(nuevoClienteGuardar);
                 break;
             case 4:
-                consulta = " SELECT N FROM AaNivel4 N order by N.hijos, N.idnivel4 ";
-                qConsulta = em.createQuery(consulta, AaNivel4.class);
-                listaNivel4 = (List<AaNivel4>) qConsulta.getResultList();
                 break;
             case 5:
-                consulta = " SELECT N FROM AaNivel5 N order by N.hijos, N.idnivel5 ";
-                qConsulta = em.createQuery(consulta, AaNivel5.class);
-                listaNivel5 = (List<AaNivel5>) qConsulta.getResultList();
                 break;
             case 6:
-                consulta = " SELECT N FROM AaNivel6 N order by N.hijos, N.idnivel6 ";
-                qConsulta = em.createQuery(consulta, AaNivel6.class);
-                listaNivel6 = (List<AaNivel6>) qConsulta.getResultList();
                 break;
         }
+
+        // Actualizo la nueva capacidad de la tabla
+        capacidadActual.setNumeroregistros(capacidadActual.getNumeroregistros() + 1);
+        this.actualizarObjeto(capacidadActual);
 
         return Boolean.TRUE;
     }
 
-    private List<AaCapacidades> obtenerCapacidades() {
-        String sConsulta = " SELECT C FROM AaCapacidades C ORDER BY C.idcapacidad ASC";
-        Query qConsulta = em.createQuery(sConsulta, AaCapacidades.class);
-        return (List<AaCapacidades>) qConsulta.getResultList();
+    /**
+     * Arma el objeto a guardar en el nivel 1
+     *
+     * @param nuevoClienteGuardar
+     */
+    private void guardarEnElNivel1(AaClientes nuevoClienteGuardar) {
+        // El primer nivel no tiene padres, por esto no se consulta en la tabla "Nivel0"
+        // Armo el nuevo cliente a guardar en el nivel 1
+        AaNivel1 nuevoClienteNivel1 = new AaNivel1(null, idPunto, idCiudad, 0);
+        nuevoClienteNivel1.setFkcliente(nuevoClienteGuardar);
+        this.guardarObjeto(nuevoClienteNivel1);
+    }
+
+    /**
+     * Busca el padre en el nivel 1, luego arma el nivel 2 y lo guarda; y
+     * finalmente actualiza el número de hijos del padre
+     *
+     * @param nuevoClienteGuardar
+     */
+    private void guardarEnElNivel2(AaClientes nuevoClienteGuardar) {
+        // Busco el padre del nuevo cliente en el Nivel 1: Aquel que tenga menos hijos
+        sConsulta = " SELECT N FROM AaNivel1 N  WHERE N.hijos < :pHijos order by N.hijos ";
+        qConsulta = em.createQuery(sConsulta, AaNivel1.class);
+        qConsulta.setMaxResults(1);
+        qConsulta.setParameter("pHijos", numeroHijos);
+        AaNivel1 padreNivel1 = (AaNivel1) qConsulta.getSingleResult();
+
+        // Armo la referencia del nuevo cliente a guardar en el nivel 2
+        AaNivel2 nuevoCLienteNivel2 = new AaNivel2(null, idPunto, idCiudad, 0);
+        nuevoCLienteNivel2.setFkcliente(nuevoClienteGuardar);
+        nuevoCLienteNivel2.setFkidnivel1(padreNivel1);
+        this.guardarObjeto(nuevoCLienteNivel2);
+
+        // Actualizo el numero de hijos en el padre
+        padreNivel1.setHijos(padreNivel1.getHijos() + 1);
+        this.actualizarObjeto(padreNivel1);
+    }
+
+    /**
+     * Busca el padre en el nivel2, luego arma el nivel 3 y lo guarda; y
+     * finalmente actualiza el número de hijos del padre
+     *
+     * @param nuevoClienteGuardar
+     */
+    private void guardarEnElNivel3( AaClientes nuevoClienteGuardar) {
+        // Busco el padre del nuevo cliente en el Nivel 2: Aquel que tenga menos hijos
+        sConsulta = " SELECT N FROM AaNivel2 N  WHERE N.hijos < :pHijos order by N.hijos ";
+        qConsulta = em.createQuery(sConsulta, AaNivel2.class);
+        qConsulta.setMaxResults(1);
+        qConsulta.setParameter("pHijos", numeroHijos);
+        AaNivel2 padreNivel2 = (AaNivel2) qConsulta.getSingleResult();
+
+        // Armo la referencia del nuevo cliente a guardar en el nivel 3
+        AaNivel3 nuevoCLienteNivel3 = new AaNivel3(null, idPunto, idCiudad, 0);
+        nuevoCLienteNivel3.setFkcliente(nuevoClienteGuardar);
+        nuevoCLienteNivel3.setFkidnivel2(padreNivel2);
+        this.guardarObjeto(nuevoCLienteNivel3);
+
+        // Actualizo el numero de hijos en el padre
+        padreNivel2.setHijos(padreNivel2.getHijos() + 1);
+        this.actualizarObjeto(padreNivel2);
+    }
+
+    /**
+     * Busca en la tabla capacidades el registro que indica en cuál tabla hay
+     * capacidad para insertar el nuevo cliente
+     *
+     * @return objeto con la capacidad actual disponible
+     */
+    private AaCapacidades obtenerTablaConCapacidad() {
+        sConsulta = " SELECT C FROM AaCapacidades C ORDER BY C.idcapacidad ";
+        qConsulta = em.createQuery(sConsulta, AaCapacidades.class);
+        List<AaCapacidades> todasLasCapacidades = qConsulta.getResultList();
+        for (AaCapacidades capacidadRevisar : todasLasCapacidades) {
+            if (capacidadRevisar.getNumeroregistros() < capacidadRevisar.getMaximacapacidad()) {
+                return capacidadRevisar;
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * Busca en la tabla configuracion actual el registro activo que indica la
+     * configuracion actual del sistema
+     *
+     * @return objeto con la configuracion actual del sistema
+     */
+    private AaConfiguraciones obtenerConfiguracionActual() {
+        sConsulta = " SELECT C FROM AaConfiguraciones C WHERE C.activa = 1";
+        qConsulta = em.createQuery(sConsulta, AaConfiguraciones.class);
+        return (AaConfiguraciones) qConsulta.getSingleResult();
     }
 
 }
