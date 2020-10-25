@@ -49,6 +49,11 @@
                                     <p:menuitem value="Cargar" icon="fa fa-upload" outcome="/clientes/cargar" />
                                     <p:menuitem value="Buscar" url="#" icon="fa fa-search" />
                                 </p:submenu>
+                                
+                                  <p:submenu label="Graficas" icon="fa fa-chart-line" >
+                                      <p:menuitem value="Niveles" icon="fa fa-project-diagram" outcome="/graficas/niveles" />
+                                      <p:menuitem value="Otra" url="#" icon="fa fa-chart-bar" />
+                                  </p:submenu>
 
                                 <p:menuitem value="Salir" icon="fa fa-sign-out" action="#{mbPlantilla.salir()}"/>
                             </pi:menu>

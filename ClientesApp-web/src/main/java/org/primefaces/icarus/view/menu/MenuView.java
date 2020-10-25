@@ -39,7 +39,7 @@ public class MenuView {
         DefaultMenuItem item = new DefaultMenuItem("External");
 		item.setUrl("http://www.primefaces.org");
         item.setIcon("ui-icon-home");
-		firstSubmenu.addElement(item);
+//		firstSubmenu.addElement(item);
         
         model.addElement(firstSubmenu);
 		
@@ -50,18 +50,18 @@ public class MenuView {
 		item.setIcon("ui-icon-disk");
         item.setCommand("#{menuView.save}");
         item.setUpdate("messages");
-		secondSubmenu.addElement(item);
+//		secondSubmenu.addElement(item);
         
         item = new DefaultMenuItem("Delete");
         item.setIcon("ui-icon-close");
         item.setCommand("#{menuView.delete}");
         item.setAjax(false);
-        secondSubmenu.addElement(item);
+//        secondSubmenu.addElement(item);
         
         item = new DefaultMenuItem("Redirect");
         item.setIcon("ui-icon-search");
         item.setCommand("#{menuView.redirect}");
-		secondSubmenu.addElement(item);
+//		secondSubmenu.addElement(item);
 
         model.addElement(secondSubmenu);
 	}

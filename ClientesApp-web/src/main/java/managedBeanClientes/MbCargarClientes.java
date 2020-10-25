@@ -34,7 +34,9 @@ public class MbCargarClientes extends MbGeneral implements Serializable {
     private AaCargasclientes ultimosDatos;
     private String observaciones;
     private List<Terceros> tercerosList;
-
+    // to fix_
+    private Integer numeroClientesAleatorios;
+    
     @EJB(beanName = "ServiciosCargaImpl")
     private ServiciosCarga ServiciosCarga;
 
@@ -73,20 +75,21 @@ public class MbCargarClientes extends MbGeneral implements Serializable {
             //this.serviciosVarios.guardarObjetoCliente(cliente);
         }
         // Creo usuarios temporales para probar la ubicación de los usuarios en el nivel correspondiente:
-        List<AaClientes> usuariosAleatorios = this.crearUsuariosRandomicos(6);
+        // To fix:
+        List<AaClientes> usuariosAleatorios = this.crearUsuariosRandomicos(this.getNumeroClientesAleatorios());
         for (AaClientes usuariosAleatorio : usuariosAleatorios) {
             this.serviciosVarios.guardarObjetoCliente(usuariosAleatorio);
         }
-
+       
         AaCargasclientes nuevaCarga = new AaCargasclientes();
         nuevaCarga.setFechacarga(Utilidades.getFechaActualDate());
         // Primer cliente
         AaClientes primerCliente = new AaClientes();
-        primerCliente.setIdtercero(this.getTercerosList().get(0).getIdtercero());
+        primerCliente.setIdtercero(usuariosAleatorios.get(0).getIdtercero());
         nuevaCarga.setFkprimercliente(primerCliente);
         // Ultimo Cliente
         AaClientes ultimoCliente = new AaClientes();
-        ultimoCliente.setIdtercero(this.getTercerosList().get(this.getTercerosList().size() - 1).getIdtercero());
+        ultimoCliente.setIdtercero(usuariosAleatorios.get(usuariosAleatorios.size() - 1).getIdtercero());
         nuevaCarga.setFkultimocliente(ultimoCliente);
         // Usuario que carga
         AaUsuario usuarioCarga = new AaUsuario();
@@ -147,4 +150,13 @@ public class MbCargarClientes extends MbGeneral implements Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+
+    public Integer getNumeroClientesAleatorios() {
+        return numeroClientesAleatorios;
+    }
+
+    public void setNumeroClientesAleatorios(Integer numeroClientesAleatorios) {
+        this.numeroClientesAleatorios = numeroClientesAleatorios;
+    }
+
 }

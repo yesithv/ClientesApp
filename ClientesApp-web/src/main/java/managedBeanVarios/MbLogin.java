@@ -16,7 +16,7 @@ import javax.faces.bean.ViewScoped;
 
 import javax.faces.context.FacesContext;
 import mapeo.AaUsuario;
-import org.primefaces.context.RequestContext;
+
 
 /**
  *
@@ -53,9 +53,10 @@ public class MbLogin implements Serializable {
             Utilidades.redireccionar("dashboard.xhtml");
 
         } else {
-            RequestContext.getCurrentInstance().update("growl");
+            // fix:
+           // RequestContext.getCurrentInstance().update("growl");
             this.setFocoPagina("itUsuario");
-            RequestContext.getCurrentInstance().update("focus");
+            //RequestContext.getCurrentInstance().update("focus");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Información", "Usuario y/o contraseña incorrectos, intente nuevamente"));
         }
     }

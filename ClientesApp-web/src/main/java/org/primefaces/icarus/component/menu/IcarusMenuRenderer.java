@@ -237,7 +237,7 @@ public class IcarusMenuRenderer extends BaseMenuRenderer {
                     throw new FacesException("MenuItem must be inside a form element");
                 }
 
-                String command;
+                String command ="";
                 if(menuitem.isDynamic()) {
                     String menuClientId = menu.getClientId(context);
                     Map<String,List<String>> params = menuitem.getParams();
@@ -247,11 +247,11 @@ public class IcarusMenuRenderer extends BaseMenuRenderer {
                     List<String> idParams = new ArrayList<String>();
                     idParams.add(menuitem.getId());
                     params.put(menuClientId + "_menuid", idParams);
-
-                    command = menuitem.isAjax() ? buildAjaxRequest(context, menu, (AjaxSource) menuitem, form, params) : buildNonAjaxRequest(context, menu, form, menuClientId, params, true);
+                    // fix
+                    //command = menuitem.isAjax() ? buildAjaxRequest(context, menu, (AjaxSource) menuitem, form, params) : buildNonAjaxRequest(context, menu, form, menuClientId, params, true);
                 } 
                 else {
-                    command = menuitem.isAjax() ? buildAjaxRequest(context, (AjaxSource) menuitem, form) : buildNonAjaxRequest(context, ((UIComponent) menuitem), form, ((UIComponent) menuitem).getClientId(context), true);
+                    //command = menuitem.isAjax() ? buildAjaxRequest(context, (AjaxSource) menuitem, form) : buildNonAjaxRequest(context, ((UIComponent) menuitem), form, ((UIComponent) menuitem).getClientId(context), true);
                 }
 
                 onclick = (onclick == null) ? command : onclick + ";" + command;

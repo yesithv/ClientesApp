@@ -46,23 +46,24 @@ public class ScheduleView implements Serializable {
 
     @PostConstruct
 	public void init() {
-		eventModel = new DefaultScheduleModel();
-		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-		eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
-		
-		lazyEventModel = new LazyScheduleModel() {
-			
-			@Override
-			public void loadEvents(Date start, Date end) {
-				Date random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
-				
-				random = getRandomDate(start);
-				addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
-			}	
-		};
+            // fix
+//		eventModel = new DefaultScheduleModel();
+//		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
+//		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
+//		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
+//		eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
+//		
+//		lazyEventModel = new LazyScheduleModel() {
+//			
+//			@Override
+//			public void loadEvents(Date start, Date end) {
+//				Date random = getRandomDate(start);
+//				addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
+//				
+//				random = getRandomDate(start);
+//				addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
+//			}	
+//		};
 	}
 	
 	public Date getRandomDate(Date base) {
@@ -187,7 +188,8 @@ public class ScheduleView implements Serializable {
 	}
 	
 	public void onDateSelect(SelectEvent selectEvent) {
-		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+//            fix
+//		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 	}
 	
 	public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -197,9 +199,10 @@ public class ScheduleView implements Serializable {
 	}
 	
 	public void onEventResize(ScheduleEntryResizeEvent event) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-		
-		addMessage(message);
+//            fix
+//		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+//		
+//		addMessage(message);
 	}
 	
 	private void addMessage(FacesMessage message) {
