@@ -11,8 +11,6 @@ Es necesario tener instalo el servidor de base de datos y además el sistema de 
 del cual se traerá la información del cliente y de las compras realizadas
 ```
 
-
-
 ## Despliegue 📦
 
 _El despliegue del proyecto se hace sobre la máquina principal, localmente donde es va a tener la caja principal de almacen_
