@@ -23,3 +23,5 @@ _Las herramientas utilizadas en el proyecto fueron las siguientes:_
 * [Primefaces](https://www.primefaces.org/) - El framework para JSF usado
 * [MySQL](https://www.mysql.com/) - Servidor de base de datos
 * [Java](https://www.oracle.com/java/technologies/javaee/javaee6technologies.html) - Lenguaje para el backend utilizado
+* [GlassFish](https://javaee.github.io/glassfish/) - Servidor para la aplicación
+* [NetBeans](https://netbeans.apache.org/) - IDE
