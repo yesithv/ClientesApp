@@ -2,12 +2,13 @@
 _Este es un proyecto desarrollado para gestionar los clientes en un nuevo sistema de compensación en compras de la cansta familiar, la idea es armar una pirámide que bonifica hasta el 4 nivel hacia abajo y además dá beneficios en el porcentaje de ganacias de la red, y de la compañía en general_
 
 
-## Pre-requisitos 📋
+### Pre-requisitos 📋
 
 _Que cosas necesitas para instalar el software y como instalarlas_
 
 ```
-Es necesario tener instalo el servidor de base de datos y además el sistema de facturación POS, del cual se traerá la información del cliente y de las compras realizadas
+Es necesario tener instalo el servidor de base de datos y además el sistema de facturación POS, 
+del cual se traerá la información del cliente y de las compras realizadas
 ```
 
 
